@@ -5,6 +5,7 @@ interface Item {
 }
 
 export interface Section {
+  title: string;
   text: string;
   items: Item[];
 }
@@ -12,5 +13,5 @@ export interface Section {
 export interface Build {
   character?: Character;
   intro?: string;
-  sections?: Section[];
+  sections: Section[];
 }

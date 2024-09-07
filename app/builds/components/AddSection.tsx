@@ -1,33 +1,42 @@
 import React, { useState } from "react";
+import { Section } from "@/app/types";
 
-export default function AddSection() {
+interface Props {
+  addSectionCallback: (section: Section) => void;
+}
+
+export default function AddSection({ addSectionCallback }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
 
   const handleCreate = () => {
-    // Handle create logic here
     console.log("Creating section with title:", title);
     setIsOpen(false);
     setTitle("");
+    addSectionCallback({
+      title,
+      text: "",
+      items: [],
+    });
   };
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="px-4 py-2 mt-6 bg-yellow-300 text-gray-900 rounded-lg hover:bg-yellow-100 transition duration-300 ease-in-out"
       >
         Add Section
       </button>
 
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Add New Section</h2>
             <div className="mb-4">
               <label
                 htmlFor="title"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-400 mb-1"
               >
                 Title
               </label>
@@ -36,19 +45,19 @@ export default function AddSection() {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
               />
             </div>
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+                className="mt-6 bg-gray-200 text-gray-900 px-6 py-3 rounded-lg hover:bg-red-100 transition duration-300 ease-in-out"
               >
                 Cancel
               </button>
               <button
                 onClick={handleCreate}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className="mt-6 bg-yellow-300 text-gray-900 px-6 py-3 rounded-lg hover:bg-green-100 transition duration-300 ease-in-out"
               >
                 Create
               </button>
