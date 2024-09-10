@@ -20,13 +20,8 @@ export default function Home() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Contact
+                <a href="builds/create" className="hover:underline">
+                  Create Build
                 </a>
               </li>
             </ul>
@@ -35,13 +30,7 @@ export default function Home() {
 
         <main className="flex-grow container mx-auto px-4 py-8">
           <h2 className="text-3xl font-bold mb-4">Welcome to My Homepage</h2>
-          <p className="mb-4">
-            This is a basic Next.js TypeScript homepage styled with Tailwind
-            CSS.
-          </p>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Learn More
-          </button>
+          <p className="mb-4">Go create some builds</p>
         </main>
 
         <footer className="bg-gray-200 p-4 text-center">
