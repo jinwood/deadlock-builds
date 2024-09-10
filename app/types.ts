@@ -10,7 +10,7 @@ export interface Section {
   items: Item[];
 }
 
-export interface Build {
+export interface CharacterBuild {
   character?: Character;
   intro?: string;
   sections: Section[];
