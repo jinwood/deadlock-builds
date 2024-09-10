@@ -1,8 +1,16 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-import { CharacterBuild } from "../types";
+"use client";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
+import { CharacterBuild, Section } from "../types";
 
 interface CharacterBuildContextType {
   build: CharacterBuild;
+  addSection: (section: Section) => void;
   setBuild: React.Dispatch<React.SetStateAction<CharacterBuild>>;
 }
 
@@ -17,8 +25,15 @@ export const CharacterBuildProvider: React.FC<{ children: ReactNode }> = ({
     sections: [],
   });
 
+  const addSection = useCallback((newSection: Section) => {
+    setBuild((prevBuild) => ({
+      ...prevBuild,
+      sections: [...prevBuild.sections, newSection],
+    }));
+  }, []);
+
   return (
-    <CharacterBuildContext.Provider value={{ build, setBuild }}>
+    <CharacterBuildContext.Provider value={{ build, setBuild, addSection }}>
       {children}
     </CharacterBuildContext.Provider>
   );

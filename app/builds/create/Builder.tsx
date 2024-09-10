@@ -7,26 +7,14 @@ import BuildNotes from "../components/BuildNotes";
 import { Build, Section } from "@/app/types";
 import AddSection from "../components/AddSection";
 import Sections from "../components/Sections";
+import {
+  CharacterBuildProvider,
+  useCharacterBuild,
+} from "@/app/context/BuildContext";
 
 export default function CharacterBuildClient() {
-  const [build, setBuild] = useState<Build>({
-    sections: [
-      {
-        title: "",
-        text: "Enter your text",
-        items: [],
-      },
-    ],
-  });
+  const { build, setBuild, addSection } = useCharacterBuild();
   const [notes, setNotes] = useState("");
-
-  const addSection = (newSection: Section) => {
-    const updatedSections = [...(build.sections ?? []), newSection];
-    setBuild({
-      ...build,
-      sections: updatedSections,
-    });
-  };
 
   const handleSave = () => {
     // Implement save functionality here
