@@ -4,13 +4,9 @@ import React, { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import BuildNotes from "../components/BuildNotes";
-import { Build, Section } from "@/app/types";
 import AddSection from "../components/AddSection";
 import Sections from "../components/Sections";
-import {
-  CharacterBuildProvider,
-  useCharacterBuild,
-} from "@/app/context/BuildContext";
+import { useCharacterBuild } from "@/app/context/BuildContext";
 
 export default function CharacterBuildClient() {
   const { build, setBuild, addSection } = useCharacterBuild();
@@ -21,6 +17,7 @@ export default function CharacterBuildClient() {
     console.log("Saving build:", { build, notes });
   };
 
+  console.log(build.sections);
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -34,7 +31,12 @@ export default function CharacterBuildClient() {
           <AddSection addSectionCallback={addSection} />
         </div>
       </div>
-      <BuildNotes notes={notes} setNotes={setNotes} />
+      {build.sections.map((section) => (
+        <div key={section.title}>
+          <h2>{section.title}</h2>
+          <p>{section.text}</p>
+        </div>
+      ))}
       <button
         onClick={handleSave}
         className="mt-6 bg-yellow-300 text-gray-900 px-6 py-3 rounded-lg hover:bg-yellow-100 transition duration-300 ease-in-out"

@@ -8,6 +8,7 @@ interface Props {
 export default function AddSection({ addSectionCallback }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
 
   const handleCreate = () => {
     console.log("Creating section with title:", title);
@@ -15,7 +16,7 @@ export default function AddSection({ addSectionCallback }: Props) {
     setTitle("");
     addSectionCallback({
       title,
-      text: "",
+      text,
       items: [],
     });
   };
@@ -48,6 +49,22 @@ export default function AddSection({ addSectionCallback }: Props) {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
               />
             </div>
+            <div className="mb-4">
+              <label
+                htmlFor="title"
+                className="block text-sm font-medium text-gray-400 mb-1"
+              >
+                Text
+              </label>
+              <input
+                type="text"
+                id="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+              />
+            </div>
+
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setIsOpen(false)}
