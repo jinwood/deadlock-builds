@@ -31,8 +31,8 @@ export default function AddSection({ addSectionCallback }: Props) {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
+        <div className="w-full">
+          <div className="bg-gray-800 rounded-lg p-6 w-full ">
             <h2 className="text-xl font-bold mb-4">Add New Section</h2>
             <div className="mb-4">
               <label
@@ -56,12 +56,12 @@ export default function AddSection({ addSectionCallback }: Props) {
               >
                 Text
               </label>
-              <input
-                type="text"
+              <textarea
                 id="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                rows={4}
               />
             </div>
 

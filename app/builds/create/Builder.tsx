@@ -20,7 +20,7 @@ export default function CharacterBuildClient() {
   console.log(build.sections);
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="container mx-auto px-4">
         <div className="md:col-span-2">
           <h2 className="text-2xl font-semibold mb-4 text-yellow-300">
             Sections
