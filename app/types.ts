@@ -5,6 +5,7 @@ interface Item {
 }
 
 export interface Section {
+  editMode: boolean;
   title: string;
   text: string;
   items: Item[];

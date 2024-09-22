@@ -4,17 +4,27 @@ import React, { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import BuildNotes from "../components/BuildNotes";
-import AddSection from "../components/AddSection";
-import Sections from "../components/Sections";
 import { useCharacterBuild } from "@/app/context/BuildContext";
+import SectionArea from "../components/Section";
 
 export default function CharacterBuildClient() {
   const { build, setBuild, addSection } = useCharacterBuild();
   const [notes, setNotes] = useState("");
 
+  const handleAddSection = () => {
+    addSection({
+      editMode: true,
+      title: "",
+      text: "",
+      items: [],
+    });
+  };
+
   const handleSave = () => {
-    // Implement save functionality here
     console.log("Saving build:", { build, notes });
+    setBuild({
+      ...build,
+    });
   };
 
   console.log(build.sections);
@@ -25,16 +35,17 @@ export default function CharacterBuildClient() {
           <h2 className="text-2xl font-semibold mb-4 text-yellow-300">
             Sections
           </h2>
-          <Sections sections={build.sections} />
-        </div>
-        <div>
-          <AddSection addSectionCallback={addSection} />
+          <button
+            onClick={handleAddSection}
+            className="flex items-center justify-center p-3 bg-green-200 text-black rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 h-2 w-2 mb-4"
+          >
+            +
+          </button>
         </div>
       </div>
-      {build.sections.map((section) => (
-        <div key={section.title}>
-          <h2>{section.title}</h2>
-          <p>{section.text}</p>
+      {build.sections.map((section, i) => (
+        <div key={i}>
+          <SectionArea section={section} onSave={handleSave} />
         </div>
       ))}
       <button
