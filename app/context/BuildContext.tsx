@@ -12,6 +12,7 @@ interface CharacterBuildContextType {
   build: CharacterBuild;
   addSection: (section: Section) => void;
   setBuild: React.Dispatch<React.SetStateAction<CharacterBuild>>;
+  saveSection: (id: string, updatedSection: Section) => void;
 }
 
 const CharacterBuildContext = createContext<
@@ -21,6 +22,14 @@ const CharacterBuildContext = createContext<
 export const CharacterBuildProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const saveSection = (id: string, updatedSection: Section): void => {
+    setBuild((prevBuild) => ({
+      ...prevBuild,
+      sections: prevBuild.sections.map((section) =>
+        section.id === id ? { ...updatedSection, editMode: false } : section,
+      ),
+    }));
+  };
   const [build, setBuild] = useState<CharacterBuild>({
     sections: [],
   });
@@ -33,7 +42,9 @@ export const CharacterBuildProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <CharacterBuildContext.Provider value={{ build, setBuild, addSection }}>
+    <CharacterBuildContext.Provider
+      value={{ build, setBuild, addSection, saveSection }}
+    >
       {children}
     </CharacterBuildContext.Provider>
   );
