@@ -6,13 +6,15 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import BuildNotes from "../components/BuildNotes";
 import { useCharacterBuild } from "@/app/context/BuildContext";
 import SectionArea from "../components/Section";
+import { uuid } from "@/app/util";
 
 export default function CharacterBuildClient() {
-  const { build, setBuild, addSection } = useCharacterBuild();
+  const { build, setBuild, addSection, saveSection } = useCharacterBuild();
   const [notes, setNotes] = useState("");
 
   const handleAddSection = () => {
     addSection({
+      id: uuid(),
       editMode: true,
       title: "",
       text: "",
@@ -22,9 +24,6 @@ export default function CharacterBuildClient() {
 
   const handleSave = () => {
     console.log("Saving build:", { build, notes });
-    setBuild({
-      ...build,
-    });
   };
 
   console.log(build.sections);
@@ -45,7 +44,7 @@ export default function CharacterBuildClient() {
       </div>
       {build.sections.map((section, i) => (
         <div key={i}>
-          <SectionArea section={section} onSave={handleSave} />
+          <SectionArea section={section} onSave={saveSection} />
         </div>
       ))}
       <button
